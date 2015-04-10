@@ -31,6 +31,7 @@ module BitmaskAttributes
     private
     
       def validate!
+        return unless @mapping
         each do |value|
           if @mapping.key? value
             true
@@ -52,7 +53,7 @@ module BitmaskAttributes
       end
     
       def serialize!
-        @record.send(:write_attribute, @attribute, to_i)
+        @record.send(:write_attribute, @attribute, to_i) if @record
       end
   
       def extract_values
